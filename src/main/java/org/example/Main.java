@@ -7,7 +7,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        Bank bank = new Bank();
         int option = 0;
+        Boolean stateFlow = true;
 
         do {
             System.out.println("===============================");
@@ -16,11 +18,9 @@ public class Main {
 
             System.out.println(" ");
             System.out.println("[1] - Create account");
-            System.out.println("[2] - Deposit");
-            System.out.println("[3] - Withdraw");
-            System.out.println("[4] - Transfer");
-            System.out.println("[5] - List accounts");
-            System.out.println("[6] - Exit");
+            System.out.println("[2] - Show account");
+            System.out.println("[3] - List accounts");
+            System.out.println("[4] - Exit");
 
             System.out.println("===============================");
             System.out.println("===============================");
@@ -29,8 +29,17 @@ public class Main {
             option = scan.nextInt();
 
             switch (option) {
-                case 1
+                case 1 -> bank.createAccount(scan);
+                case 2 -> {
+                    System.out.println("Enter with account number");
+                    bank.viewAccount(scan.nextLong(), scan);
+                }
+                case 3 -> bank.getAll();
+                case 4 -> stateFlow = false;
+                default -> System.out.println("Invalid option");
             }
-        } while (true);
+        } while (stateFlow);
+
+        scan.close();
     }
 }

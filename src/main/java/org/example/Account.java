@@ -5,7 +5,7 @@ public class Account {
     private String owner;
     private double balance;
 
-    public Account(long number, String owner, double balance) {
+    private Account(long number, String owner, double balance) {
         this.number = number;
         this.owner = owner;
         this.balance = balance;
@@ -42,6 +42,8 @@ public class Account {
         if (value > 0 && value < balance) {
             balance -= value;
             System.out.println("Operation success!");
+        } else if (value > balance) {
+            System.out.println("Insufficient founds");
         }
     }
 
@@ -49,15 +51,17 @@ public class Account {
         if (value > 0 && value < balance) {
             balance -= value;
             accountDest.balance += value;
+        } else if (value > balance) {
+            System.out.println("Insufficient founds");
         }
     }
 
     @Override
     public String toString() {
-        return "{ number: " + number + ", owner: " + owner + ", balance: " + balance + "US$ }";
+        return "{\n  number: " + number + ", \n  owner: " + owner + ", \n  balance: " + balance + " US$ \n}";
     }
 
-    private static class Builder {
+    public static class Builder {
         private long number = System.currentTimeMillis();
         private String owner;
         private double balance;
